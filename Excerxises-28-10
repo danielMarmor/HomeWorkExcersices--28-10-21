@@ -1,0 +1,135 @@
+#1.SPLIT מחלקת מחרוזת לחלקים לפי תו מפריד שחוזר על עצמו במחרוזת
+#ניתן לבחור את תו המפריד (DELIMITER) ולהעביר אותו כפרמטר לפונקציה
+
+#2.
+def check_expression(expression):
+    operators = ('+', '-', '*', '/')
+    eq = '='
+    exp_str = str(expression)
+    exp_str = exp_str.replace(' ', '')
+
+    if exp_str.find(eq) == -1:
+        return 'Not an Expression'
+
+    found_operator = None
+    for op in operators:
+        if exp_str.find(op) != -1:
+            found_operator = op
+            break
+    if found_operator is None:
+        return 'Not an Expression'
+
+    arr_split = exp_str.split(eq)
+    exp = arr_split[0]
+    split_exp = exp.split(found_operator)
+
+    left_wing_val = float(split_exp[0])
+    right_wing_val = float(split_exp[1])
+    true_result = float(arr_split[1])
+
+    exp_result = 0
+    if found_operator == '+':
+        exp_result = left_wing_val + right_wing_val
+    elif found_operator == '-':
+        exp_result = left_wing_val - right_wing_val
+    elif found_operator == '*':
+        exp_result = left_wing_val * right_wing_val
+    else:
+        exp_result = left_wing_val / right_wing_val
+
+    if exp_result == true_result:
+        return 'Correct'
+    return 'Error'
+
+
+while True:
+    input_exp = input('Enter Expression: ')
+    if input_exp == 0:
+        break
+    check_result = check_expression(input_exp)
+    print(check_result)
+
+
+#3. יש לנסח נכון את השאלה. לא ברור מה רוצים פה
+#4 + #5
+def move_upper_case(words, delimiter):
+    str_words = str(words)
+    str_words = str_words.replace(' ', '')
+    arr_words = str_words.split(delimiter)
+    res_words = []
+    for w in arr_words:
+        if len(w) < 4:
+            break
+        res_words.append(w.upper())
+    return res_words
+
+
+words_str = input('Enter Words: ')
+uppercase = move_upper_case(words_str, ',')
+print(uppercase)
+
+#6
+def get_last_letters(word, num):
+    str_word = str(word)
+    start_index  = len(str_word) - int(num)
+    end_index = len(str_word)
+    last_letters = list(str_word)[start_index: end_index]
+    last_letters_word = ''.join(last_letters)
+    return last_letters_word
+
+
+def get_third_letters(word):
+    str_word = str(word)
+    start_index = 0
+    end_index = len(str_word) // 3
+    last_letters = list(str_word)[start_index: end_index]
+    last_letters_word = ''.join(last_letters)
+    return last_letters_word
+
+
+def reverse_words(word):
+    str_word = str(word)
+    split_words = str_word.split(' ')
+    first_name = split_words[0].strip()
+    remove_at_index = len(first_name)//2
+    first_name_changed = first_name[0: remove_at_index - 1] + first_name[remove_at_index: len(first_name)]
+    last_name = split_words[1].strip()
+    upper_last_name = last_name.upper()
+    reverse_result = upper_last_name + ' ' + first_name_changed
+    return reverse_result
+
+my_name = input('Enter Name: ')
+#letters = get_last_letters(my_name, 5)
+#print(letters)
+third_letters = get_third_letters(my_name)
+print(third_letters)
+
+count_a = my_name.count('a')
+print(count_a)
+
+is_b = my_name.find('b') != -1
+print(is_b)
+
+reverse = reverse_words(my_name)
+print(reverse)
+
+#7
+def print_sentence(sentence):
+    str_sentence = str(sentence)
+
+    first_index = str_sentence.find('o')
+    print(f'first_index: { first_index}')
+
+    last_index = str_sentence.rfind('o')
+    print(f'last_index: {last_index}')
+
+    res_sentence = str_sentence[0: first_index] + str_sentence[last_index + 1:  len(str_sentence)]
+    print(res_sentence)
+
+
+print_sentence('Hello World')
+
+#8
+print('Hello World'.replace('o', ''))
+
+
